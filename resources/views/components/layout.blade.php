@@ -13,6 +13,12 @@
 
     <x-navbar />
 
+    @if (session('success'))
+        <div class="alert alert-success text-center mb-0 rounded-0 shadow-sm">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <div class="min-vh-100">
         {{ $slot }}
     </div>

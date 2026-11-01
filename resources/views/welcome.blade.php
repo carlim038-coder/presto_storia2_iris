@@ -11,4 +11,24 @@
             </div>
         </div>
     </div>
+
+    <!-- Sezione degli ultimi articoli (User Story #2) -->
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-12 text-center mb-5">
+                <h2 class="display-5">Ultimi articoli inseriti</h2>
+            </div>
+        </div>
+        <div class="row height-custom justify-content-center align-items-center py-5">
+            @forelse ($articles as $article)
+                <div class="col-12 col-md-3">
+                    <x-card :article="$article" />
+                </div>
+            @empty
+                <div class="col-12">
+                    <h3 class="text-center">Non sono ancora stati creati articoli</h3>
+                </div>
+            @endforelse
+        </div>
+    </div>
 </x-layout>

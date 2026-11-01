@@ -9,11 +9,11 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{ route('homepage') }}">Home</a>
                 </li>
-                
+
                 @auth
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('create.article') }}">Pubblica articolo</a>
-                    </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('create.article') }}">Pubblica articolo</a>
+                </li>
                 @endauth
 
                 <!-- Menu a tendina per le Categorie condivise globalmente -->
@@ -23,7 +23,11 @@
                     </a>
                     <ul class="dropdown-menu">
                         @foreach ($categories as $category)
-                            <li><a class="dropdown-item" href="#">{{ $category->name }}</a></li>
+                        <li>
+                            <a class="dropdown-item text-capitalize" href="{{ route('byCategory', compact('category')) }}">
+                                {{ $category->name }}
+                            </a>
+                        </li>
                         @endforeach
                     </ul>
                 </li>
@@ -31,26 +35,26 @@
 
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 @guest
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Accedi</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">Registrati</a>
-                    </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('login') }}">Accedi</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('register') }}">Registrati</a>
+                </li>
                 @else
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle fw-semibold" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ Auth::user()->name }}
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li>
-                                <form action="{{ route('logout') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="dropdown-item">Logout</button>
-                                </form>
-                            </li>
-                        </ul>
-                    </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle fw-semibold" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ Auth::user()->name }}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="dropdown-item">Logout</button>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
                 @endguest
             </ul>
         </div>
